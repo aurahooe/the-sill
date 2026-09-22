@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Sill — this hour’s window</title>
+  <meta name="description" content="A small public room that turns once an hour. Leave a note. Keep it private, or put it on the sill." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,560;0,9..144,700;1,9..144,400;1,9..144,560&family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="wash" aria-hidden="true"></div>
+
+  <header class="top">
+    <a class="mark" href="#room">
+      <span class="mark-dot"></span>
+      The Sill
+    </a>
+    <nav class="nav">
+      <a href="#room">The room</a>
+      <a href="#wall">On the sill</a>
+      <a href="#desk">Your desk</a>
+    </nav>
+    <div class="top-right">
+      <button class="ghost" id="auth-btn" type="button">Sign in</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="room">
+      <p class="kicker" id="hour-kicker">Hour turning</p>
+      <h1 id="hour-headline">The window is still finding its light.</h1>
+      <p class="lede" id="hour-editorial">
+        This is a quiet room on the internet. People leave notes. If they mark a note public, it sits on the sill for anyone passing by.
+      </p>
+      <div class="hour-meter">
+        <div class="meter-label">
+          <span>This hour ends in</span>
+          <strong id="countdown">—:—:—</strong>
+        </div>
+        <div class="bar"><i id="hour-bar"></i></div>
+      </div>
+    </section>
+
+    <section class="feature" id="feature">
+      <p class="section-label">Featured on the sill</p>
+      <article class="feature-card" id="feature-card">
+        <p class="muted" id="feature-empty">No public note has been chosen for this hour yet. Leave one, and the next turn might pick it up.</p>
+        <div id="feature-body" hidden></div>
+      </article>
+    </section>
+
+    <section class="wall" id="wall">
+      <div class="section-head">
+        <div>
+          <p class="section-label">Public notes</p>
+          <h2>What people put on the sill</h2>
+        </div>
+        <p class="muted slim">Private notes stay on your desk. Only the ones you mark public appear here.</p>
+      </div>
+      <div class="grid" id="public-grid"></div>
+    </section>
+
+    <section class="desk" id="desk">
+      <div class="section-head">
+        <div>
+          <p class="section-label">Your desk</p>
+          <h2>Write something that can last an hour, or longer</h2>
+        </div>
+      </div>
+      <div class="desk-panel" id="desk-locked">
+        <p>Sign in to keep a desk. Notes save to your account. Flip the public switch if you want them on the sill.</p>
+        <button class="solid" id="desk-signin" type="button">Open an account</button>
+      </div>
+      <form class="composer" id="composer" hidden>
+        <label>
+          Title
+          <input name="title" maxlength="120" required placeholder="A working title" />
+        </label>
+        <label>
+          The note
+          <textarea name="body" maxlength="4000" required rows="6" placeholder="What you noticed. What you meant to say. What can sit in a window."></textarea>
+        </label>
+        <div class="composer-row">
+          <label class="switch">
+            <input type="checkbox" name="is_public" />
+            <span>Put this on the sill (public)</span>
+          </label>
+          <button class="solid" type="submit">Save note</button>
+        </div>
+        <p class="form-msg" id="compose-msg"></p>
+      </form>
+      <div class="mine" id="mine" hidden></div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>The Sill turns once an hour. Paper, ink, and whatever you leave behind.</p>
+  </footer>
+
+  <dialog id="auth-dialog">
+    <form method="dialog" class="auth-card" id="auth-form">
+      <p class="section-label">Account</p>
+      <h3 id="auth-title">Sign in or create a desk</h3>
+      <label>
+        Email
+        <input type="email" name="email" required autocomplete="email" />
+      </label>
+      <label>
+        Password
+        <input type="password" name="password" required minlength="8" autocomplete="current-password" />
+      </label>
+      <p class="form-msg" id="auth-msg"></p>
+      <div class="composer-row">
+        <button class="ghost" value="cancel" type="submit">Close</button>
+        <div class="auth-actions">
+          <button class="ghost" id="signup-btn" type="button">Create account</button>
+          <button class="solid" id="signin-btn" type="button">Sign in</button>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
